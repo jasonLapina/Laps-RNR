@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 function Layout() {
   return (
-    <Grid gridTemplateColumns='26rem 1fr' gridTemplateRows='auto 1fr' h='100vh'>
+    <Grid gridTemplateColumns='320px 1fr' gridTemplateRows='auto 1fr' h='100vh'>
       <Header />
       <Sidebar />
       <Box
