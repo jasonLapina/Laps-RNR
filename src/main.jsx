@@ -15,12 +15,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Layout from "./ui/Layout.jsx";
 
+import { lazy, Suspense } from "react";
+
 const theme = extendTheme({
   fonts: {
     heading: `'Poppins', sans-serif`,
     body: `'Poppins', sans-serif`,
   },
 });
+
+const Cabins = lazy(() => import("./pages/Cabins.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -30,6 +34,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: "/cabins",
+        element: (
+          <Suspense fallback={<div />}>
+            <Cabins />
+          </Suspense>
+        ),
       },
     ],
   },
