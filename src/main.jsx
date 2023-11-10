@@ -16,6 +16,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Layout from "./ui/Layout.jsx";
 
 import { lazy, Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const theme = extendTheme({
   fonts: {
@@ -25,7 +26,6 @@ const theme = extendTheme({
 });
 
 const Cabins = lazy(() => import("./pages/Cabins.jsx"));
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,8 +47,12 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
   <ChakraProvider theme={theme}>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </ChakraProvider>
 );
