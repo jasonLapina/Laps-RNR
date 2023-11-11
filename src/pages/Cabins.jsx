@@ -23,8 +23,6 @@ function Cabins() {
 
   if (isLoading) return <div />;
 
-  console.log(data);
-
   return (
     <Box>
       <HStack justifyContent='space-between'>

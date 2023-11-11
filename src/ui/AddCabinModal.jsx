@@ -20,6 +20,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 function AddCabinModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,6 +41,11 @@ function AddCabinModal() {
       setImage(null);
     }
   };
+
+  const { register, handleSubmit } = useForm();
+
+  // const onAddCabin = (data) => console.log(data);
+
   return (
     <>
       <Button
@@ -62,10 +68,15 @@ function AddCabinModal() {
             }}
           />
           <ModalBody pb='40px'>
-            <VStack align='normal' gap='32px'>
+            <VStack
+              as='form'
+              align='normal'
+              gap='32px'
+              // onSubmit={}
+            >
               <HStack>
                 <FormControl variant='floating' id='first-name' isRequired>
-                  <Input placeholder=' ' />
+                  <Input {...register("name")} placeholder=' ' />
                   <FormLabel>Cabin name</FormLabel>
                 </FormControl>
                 <FormControl variant='floating' id='capacity' isRequired>
