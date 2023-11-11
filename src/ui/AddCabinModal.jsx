@@ -15,10 +15,10 @@ import {
   Text,
   HStack,
   Textarea,
-  ModalFooter,
   Image,
   Center,
 } from "@chakra-ui/react";
+
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -27,6 +27,7 @@ function AddCabinModal() {
 
   const [image, setImage] = useState(null);
   const inputFileRef = useRef(null);
+  const formRef = useRef(null);
   const allowedExtensions = ["jpg", "jpeg", "png"];
   const handleUpload = (e) => {
     const file = e.target.files[0];
@@ -44,7 +45,9 @@ function AddCabinModal() {
 
   const { register, handleSubmit } = useForm();
 
-  // const onAddCabin = (data) => console.log(data);
+  const onAddCabin = (data) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -58,7 +61,7 @@ function AddCabinModal() {
       >
         Add new
       </Button>
-      <Modal size='2xl' isOpen={isOpen} onClose={onClose}>
+      <Modal size='2xl' isOpen={true} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader color='var(--secondary)'>New Cabin</ModalHeader>
@@ -73,6 +76,8 @@ function AddCabinModal() {
               align='normal'
               gap='32px'
               // onSubmit={}
+              onSubmit={handleSubmit(onAddCabin)}
+              ref={formRef}
             >
               <HStack>
                 <FormControl variant='floating' id='first-name' isRequired>
@@ -80,22 +85,34 @@ function AddCabinModal() {
                   <FormLabel>Cabin name</FormLabel>
                 </FormControl>
                 <FormControl variant='floating' id='capacity' isRequired>
-                  <Input type='number' placeholder=' ' />
+                  <Input
+                    {...register("capacity")}
+                    type='number'
+                    placeholder=' '
+                  />
                   <FormLabel>Capacity</FormLabel>
                 </FormControl>
               </HStack>
               <HStack>
                 <FormControl variant='floating' id='price' isRequired>
-                  <Input type='number' placeholder=' ' />
+                  <Input {...register("price")} type='number' placeholder=' ' />
                   <FormLabel>Regular price</FormLabel>
                 </FormControl>
                 <FormControl variant='floating' id='discount' isRequired>
-                  <Input type='number' placeholder=' ' />
+                  <Input
+                    {...register("discount")}
+                    type='number'
+                    placeholder=' '
+                  />
                   <FormLabel>Discount</FormLabel>
                 </FormControl>
               </HStack>
               <FormControl variant='floating' id='description' isRequired>
-                <Input placeholder=' ' as={Textarea} />
+                <Input
+                  {...register("description")}
+                  placeholder=' '
+                  as={Textarea}
+                />
                 <FormLabel>Description</FormLabel>
               </FormControl>
               <FormControl
@@ -131,19 +148,19 @@ function AddCabinModal() {
                   </Center>
                 )}
               </FormControl>
+              <Button
+                color='white'
+                _hover={{
+                  bgColor: "var(--secondary)",
+                }}
+                bgColor='var(--primary)'
+                mt='32px'
+                type='submit'
+              >
+                Add Cabin
+              </Button>
             </VStack>
           </ModalBody>
-          <ModalFooter>
-            <Button
-              color='white'
-              _hover={{
-                bgColor: "var(--secondary)",
-              }}
-              bgColor='var(--primary)'
-            >
-              Add Cabin
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
