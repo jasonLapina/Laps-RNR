@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { getCabins } from "../services/apiCabins";
+import AddCabinModal from "../ui/AddCabinModal";
 
 function Cabins() {
   const { data, isLoading } = useQuery("cabins", getCabins);
@@ -26,7 +27,10 @@ function Cabins() {
 
   return (
     <Box>
-      <Heading mb='32px'>All Cabins</Heading>
+      <HStack justifyContent='space-between'>
+        <Heading mb='32px'>All Cabins</Heading>
+        <AddCabinModal />
+      </HStack>
       <TableContainer>
         <Table variant='simple' role='table'>
           <Thead bgColor='var(--secondary)' role='row'>
