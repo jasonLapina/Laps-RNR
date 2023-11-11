@@ -10,6 +10,9 @@ import {
   Td,
   Image,
   Text,
+  Button,
+  HStack,
+  Divider,
 } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { getCabins } from "../services/apiCabins";
@@ -57,6 +60,26 @@ function Cabins() {
                 <Td>${Number(item.regularPrice).toFixed(2)}</Td>
                 <Td color='green.500' fontWeight='bold'>
                   {item.discount ? `$${item.discount}` : ""}
+                </Td>
+                <Td maxW='80px'>
+                  <HStack gap='16px'>
+                    <Button
+                      _hover={{
+                        color: "var(--secondary)",
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Divider bgColor='gray' h='10px' w='2px' />
+                    <Button
+                      _hover={{
+                        color: "red.700",
+                      }}
+                      color='red.500'
+                    >
+                      Delete
+                    </Button>
+                  </HStack>
                 </Td>
               </Tr>
             ))}
