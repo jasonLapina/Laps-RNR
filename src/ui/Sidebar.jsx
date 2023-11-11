@@ -65,15 +65,7 @@ function Sidebar() {
                 transform: "scaleX(1)",
               }}
             />
-            <Icon
-              transition='all .3s'
-              _groupHover={{
-                color: "var(--primary)",
-              }}
-              ml='8px'
-              display='span'
-              as={n.icon}
-            />
+            <Icon transition='all .3s' ml='8px' display='span' as={n.icon} />
             <Box>{n.text}</Box>
           </HStack>
         ))}
