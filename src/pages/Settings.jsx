@@ -5,13 +5,34 @@ import {
   FormControl,
   FormLabel,
   Grid,
+  useToast,
 } from "@chakra-ui/react";
-import { useQuery } from "react-query";
-import { getSettings } from "../services/apiSettings";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { getSettings, updateSetting } from "../services/apiSettings";
 function Settings() {
   const { data, isLoading } = useQuery("settings", getSettings);
+  const toast = useToast();
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading: isUpdating } = useMutation({
+    mutationFn: updateSetting,
+    onSuccess: () => {
+      toast({ status: "success", title: "Settings updated" });
+      queryClient.invalidateQueries("settings");
+    },
+    onError: () =>
+      toast({ status: "error", title: "Settings could not be updated" }),
+  });
 
   if (isLoading) return <div />;
+
+  const handleUpdate = (e, field) => {
+    const { value } = e.target;
+
+    if (!value) return;
+    mutate({ [field]: value });
+  };
 
   return (
     <Box>
@@ -31,19 +52,39 @@ function Settings() {
       >
         <FormControl>
           <FormLabel>Minimum nights/booking</FormLabel>
-          <Input type='number' placeholder={data[0].minBooking} />
+          <Input
+            disabled={isUpdating}
+            onBlur={(e) => handleUpdate(e, "minBooking")}
+            type='number'
+            defaultValue={data[0].minBooking}
+          />
         </FormControl>
         <FormControl>
           <FormLabel>Maximum nights/booking</FormLabel>
-          <Input type='number' placeholder={data[0].maxBooking} />
+          <Input
+            disabled={isUpdating}
+            onBlur={(e) => handleUpdate(e, "maxBooking")}
+            type='number'
+            defaultValue={data[0].maxBooking}
+          />
         </FormControl>
         <FormControl>
           <FormLabel>Maximum guests/booking</FormLabel>
-          <Input type='number' placeholder={data[0].maxGuestsPerBooking} />
+          <Input
+            disabled={isUpdating}
+            onBlur={(e) => handleUpdate(e, "maxGuestsPerBooking")}
+            type='number'
+            defaultValue={data[0].maxGuestsPerBooking}
+          />
         </FormControl>
         <FormControl>
           <FormLabel>Breakfast price ($)</FormLabel>
-          <Input type='number' placeholder={data[0].breakfastPrice} />
+          <Input
+            disabled={isUpdating}
+            onBlur={(e) => handleUpdate(e, "breakfastPrice")}
+            type='number'
+            defaultValue={data[0].breakfastPrice}
+          />
         </FormControl>
       </Grid>
     </Box>
