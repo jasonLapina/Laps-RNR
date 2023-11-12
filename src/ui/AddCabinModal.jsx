@@ -45,6 +45,7 @@ function AddCabinModal() {
       });
       queryClient.invalidateQueries("cabins");
       reset();
+      onClose();
     },
     onError: () =>
       toast({
@@ -54,25 +55,25 @@ function AddCabinModal() {
   });
 
   const onAddCabin = (data) => {
-    console.log(data);
-    // mutate(data);
-    // onClose();
+    // console.log(data);
+    // console.log({ ...data, image: data.image[0] });
+    mutate({ ...data, image: data.image[0] });
   };
 
   const allowedExtensions = ["jpg", "jpeg", "png"];
-  // const handleUpload = (e) => {
-  //   const file = e.target.files[0];
-  //   const fileExtension = file.name.split(".").pop().toLowerCase();
-  //   if (allowedExtensions.includes(fileExtension)) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       setImage(e.target.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   } else {
-  //     setImage(null);
-  //   }
-  // };
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    if (allowedExtensions.includes(fileExtension)) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImage(null);
+    }
+  };
 
   return (
     <>
@@ -106,11 +107,12 @@ function AddCabinModal() {
             >
               <HStack>
                 <FormControl variant='floating' id='first-name' isRequired>
-                  <Input {...register("name")} placeholder=' ' />
+                  <Input id='name' {...register("name")} placeholder=' ' />
                   <FormLabel>Cabin name</FormLabel>
                 </FormControl>
                 <FormControl variant='floating' id='capacity' isRequired>
                   <Input
+                    id='maxCapacity'
                     {...register("maxCapacity", { valueAsNumber: true })}
                     type='number'
                     placeholder=' '
@@ -121,6 +123,7 @@ function AddCabinModal() {
               <HStack>
                 <FormControl variant='floating' id='price' isRequired>
                   <Input
+                    id='regularPrice'
                     {...register("regularPrice", { valueAsNumber: true })}
                     type='number'
                     placeholder=' '
@@ -129,6 +132,7 @@ function AddCabinModal() {
                 </FormControl>
                 <FormControl variant='floating' id='discount'>
                   <Input
+                    id='discount'
                     {...register("discount", { valueAsNumber: true })}
                     type='number'
                     placeholder=' '
@@ -138,6 +142,7 @@ function AddCabinModal() {
               </HStack>
               <FormControl variant='floating' id='description'>
                 <Input
+                  id='description'
                   {...register("description")}
                   placeholder=' '
                   as={Textarea}
@@ -152,12 +157,12 @@ function AddCabinModal() {
                 mx='auto'
               >
                 <Input
+                  id='image'
                   zIndex={2}
                   opacity={0}
                   {...register("image")}
                   type='file'
-                  // cursor='pointer'
-
+                  onChange={handleUpload}
                   w='240px'
                 />
                 <Button
@@ -173,7 +178,7 @@ function AddCabinModal() {
                   </Box>
                   to add image
                 </Button>
-                {/* <Image src={imageRef.current} /> */}
+                <Image maxW='300px' src={image} />
               </Box>
 
               <Button
