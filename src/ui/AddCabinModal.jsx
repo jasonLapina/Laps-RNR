@@ -27,6 +27,7 @@ import { createCabin } from "../services/apiCabins";
 
 function AddCabinModal() {
   const [image, setImage] = useState(null);
+
   const inputFileRef = useRef(null);
   const formRef = useRef(null);
   const { register, handleSubmit, reset } = useForm();
@@ -53,24 +54,25 @@ function AddCabinModal() {
   });
 
   const onAddCabin = (data) => {
-    mutate(data);
-    onClose();
+    console.log(data);
+    // mutate(data);
+    // onClose();
   };
 
   const allowedExtensions = ["jpg", "jpeg", "png"];
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-    if (allowedExtensions.includes(fileExtension)) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setImage(null);
-    }
-  };
+  // const handleUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   const fileExtension = file.name.split(".").pop().toLowerCase();
+  //   if (allowedExtensions.includes(fileExtension)) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setImage(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   } else {
+  //     setImage(null);
+  //   }
+  // };
 
   return (
     <>
@@ -142,39 +144,38 @@ function AddCabinModal() {
                 />
                 <FormLabel>Description</FormLabel>
               </FormControl>
-              <FormControl
-                textAlign='center'
-                bgColor='whiteAlpha.100'
-                borderRadius='20px'
+              <Box
+                cursor='pointer'
+                borderRadius='10px'
                 pos='relative'
+                w='fit-content'
+                mx='auto'
               >
                 <Input
+                  zIndex={2}
+                  opacity={0}
+                  {...register("image")}
                   type='file'
-                  onChange={handleUpload}
-                  cursor='pointer'
-                  display='none'
-                  ref={inputFileRef}
-                />
+                  // cursor='pointer'
 
-                <Text
+                  w='240px'
+                />
+                <Button
+                  variant='unstyled'
+                  w='100%'
                   pos='absolute'
-                  left='50%'
-                  transform='translate(-50%)'
-                  cursor='pointer'
                   top='0'
-                  onClick={() => inputFileRef.current.click()}
+                  left='0'
+                  cursor='default'
                 >
-                  <Box as='span' color='var(--secondary)'>
-                    Click here{" "}
+                  <Box mr='6px' as='span' color='var(--secondary)'>
+                    Click here
                   </Box>
                   to add image
-                </Text>
-                {image && (
-                  <Center mt='16px'>
-                    <Image maxW='320px' bgColor='red' src={image} />
-                  </Center>
-                )}
-              </FormControl>
+                </Button>
+                {/* <Image src={imageRef.current} /> */}
+              </Box>
+
               <Button
                 color='white'
                 _hover={{
