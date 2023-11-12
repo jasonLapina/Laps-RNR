@@ -61,7 +61,7 @@ function Cabins() {
                 <Td>{item.maxCapacity}</Td>
                 <Td>${Number(item.regularPrice).toFixed(2)}</Td>
                 <Td color='green.500' fontWeight='bold'>
-                  {item.discount ? `$${item.discount}` : ""}
+                  {item.discount ? `$${item.discount}` : "--"}
                 </Td>
                 <Td maxW='80px'>
                   <HStack gap='16px'>
