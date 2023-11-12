@@ -11,6 +11,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import chakraTheme from "./ui/chakraTheme.js";
 
 const Cabins = lazy(() => import("./pages/Cabins.jsx"));
+const Settings = lazy(() => import("./pages/Settings.jsx"));
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div />}>
             <Cabins />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/settings",
+        element: (
+          <Suspense fallback={<div />}>
+            <Settings />
           </Suspense>
         ),
       },
