@@ -14,12 +14,12 @@ import {
   HStack,
   Divider,
 } from "@chakra-ui/react";
-import { useQuery } from "react-query";
-import { getCabins } from "../services/apiCabins";
-import AddCabinModal from "../ui/AddCabinModal";
+
+import AddCabinModal from "../features/Cabins/AddCabinModal";
+import { useGetCabins } from "../features/Cabins/useCabins";
 
 function Cabins() {
-  const { data, isLoading } = useQuery("cabins", getCabins);
+  const { data, isLoading } = useGetCabins();
 
   if (isLoading) return <div />;
 

@@ -12,51 +12,26 @@ import {
   FormLabel,
   VStack,
   Box,
-  Text,
   HStack,
   Textarea,
   Image,
-  Center,
   useToast,
 } from "@chakra-ui/react";
 
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
-import { createCabin } from "../services/apiCabins";
+import { useCreateCabin } from "./useCabins";
 
 function AddCabinModal() {
   const [image, setImage] = useState(null);
 
-  const inputFileRef = useRef(null);
   const formRef = useRef(null);
   const { register, handleSubmit, reset } = useForm();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const toast = useToast();
 
-  const queryClient = useQueryClient();
-
-  const { mutate, isLoading } = useMutation({
-    mutationFn: createCabin,
-    onSuccess: () => {
-      toast({
-        status: "success",
-        title: "Cabin created",
-      });
-      queryClient.invalidateQueries("cabins");
-      reset();
-      onClose();
-    },
-    onError: () =>
-      toast({
-        status: "error",
-        title: "Could not create cabin.",
-      }),
-  });
+  const { mutate, isLoading } = useCreateCabin(reset, onClose);
 
   const onAddCabin = (data) => {
-    // console.log(data);
-    // console.log({ ...data, image: data.image[0] });
     mutate({ ...data, image: data.image[0] });
   };
 
