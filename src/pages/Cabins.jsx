@@ -17,6 +17,7 @@ import {
 
 import AddCabinModal from "../features/Cabins/AddCabinModal";
 import { useGetCabins } from "../features/Cabins/useCabins";
+import FilterDiscount from "../features/Shared/FilterDiscount";
 
 function Cabins() {
   const { data, isLoading } = useGetCabins();
@@ -37,7 +38,9 @@ function Cabins() {
               <Th>Cabin</Th>
               <Th>Capacity</Th>
               <Th>Price</Th>
-              <Th>Discount</Th>
+              <Th>
+                <FilterDiscount />
+              </Th>
               <Th></Th>
             </Tr>
           </Thead>
