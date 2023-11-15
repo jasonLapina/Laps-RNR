@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
-function FilterDiscount() {
+function SortDiscount() {
   const [searchParams, setSearchParams] = useSearchParams();
   return (
     <Box
@@ -26,4 +26,4 @@ function FilterDiscount() {
   );
 }
 
-export default FilterDiscount;
+export default SortDiscount;

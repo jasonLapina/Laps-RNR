@@ -17,13 +17,25 @@ import {
 
 import AddCabinModal from "../features/Cabins/AddCabinModal";
 import { useGetCabins } from "../features/Cabins/useCabins";
-import FilterDiscount from "../features/Shared/FilterDiscount";
+import SortDiscount from "../features/Shared/SortDiscount";
+import { useSearchParams } from "react-router-dom";
 
 function Cabins() {
   const { data, isLoading } = useGetCabins();
 
+  const [searchParams] = useSearchParams();
+
   if (isLoading) return <div />;
 
+  const sortDiscount = searchParams.get("discount");
+
+  const sortedData = data.sort((a, b) => {
+    if (!sortDiscount) return data;
+    if (sortDiscount === "highest") {
+      return a.discount > b.discount ? -1 : 1;
+    } else return a.discount > b.discount ? 1 : -1;
+  });
+  console.log(sortedData);
   return (
     <Box>
       <HStack justifyContent='space-between'>
@@ -39,7 +51,7 @@ function Cabins() {
               <Th>Capacity</Th>
               <Th>Price</Th>
               <Th>
-                <FilterDiscount />
+                <SortDiscount />
               </Th>
               <Th></Th>
             </Tr>
