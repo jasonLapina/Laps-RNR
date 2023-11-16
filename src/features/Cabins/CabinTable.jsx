@@ -14,8 +14,10 @@ import {
 } from "@chakra-ui/react";
 
 import SortDiscount from "../Shared/SortDiscount";
+import EmptyData from "../../ui/EmptyData";
 /* eslint-disable react/prop-types */
 function CabinTable({ data }) {
+  if (!data || data.length === 0) return <EmptyData dataName={"cabins"} />;
   return (
     <TableContainer>
       <Table variant='simple' role='table'>

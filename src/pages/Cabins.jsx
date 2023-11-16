@@ -7,13 +7,9 @@ import CabinTable from "../features/Cabins/CabinTable";
 
 function Cabins() {
   const { data, isLoading } = useGetCabins();
-
   const [searchParams] = useSearchParams();
-
   if (isLoading) return <div />;
-
   const sortDiscount = searchParams.get("discount");
-
   const sortedData = data.sort((a, b) => {
     if (!sortDiscount) return data;
     if (sortDiscount === "highest") {
