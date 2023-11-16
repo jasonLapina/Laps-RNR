@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useSearchParams } from "react-router-dom";
+
 function SortDiscount() {
   const [searchParams, setSearchParams] = useSearchParams();
   return (

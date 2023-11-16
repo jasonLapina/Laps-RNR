@@ -12,6 +12,7 @@ import chakraTheme from "./ui/chakraTheme.js";
 
 const Cabins = lazy(() => import("./pages/Cabins.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
+const Bookings = lazy(() => import("./pages/Bookings.jsx"));
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div />}>
             <Settings />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/bookings",
+        element: (
+          <Suspense fallback={<div />}>
+            <Bookings />
           </Suspense>
         ),
       },
