@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Heading } from "@chakra-ui/react";
+import { Button, HStack, Heading } from "@chakra-ui/react";
 import { useState } from "react";
 import DashboardTable from "../features/Dashboard/DashboardTable";
 const days = [7, 30, 90];
@@ -7,7 +7,7 @@ function Dashboard() {
   return (
     <>
       <HStack alignItems='center' justifyContent='space-between'>
-        <Heading mb='32px'>All Cabins</Heading>
+        <Heading mb='32px'>Dashboard</Heading>
         <HStack gap='8px'>
           {days.map((d) => (
             <Button
@@ -16,8 +16,9 @@ function Dashboard() {
                 bgColor: "var(--secondary)",
               }}
               key={d}
+              onClick={() => setDay(d)}
             >
-              Last {d} days
+              In {d} days
             </Button>
           ))}
         </HStack>

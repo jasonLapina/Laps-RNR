@@ -12,3 +12,14 @@ export async function getBookings() {
 
   return data;
 }
+
+export async function getBookingsAfterDate(date) {
+  const { data, error } = await supabase.from("bookings").select().gte("").lte;
+
+  if (error) {
+    console.error(error);
+    throw new Error("Bookings could not be loaded");
+  }
+
+  return data;
+}

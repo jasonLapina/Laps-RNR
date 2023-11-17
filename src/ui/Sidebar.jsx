@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { AiFillHome, AiTwotoneCalendar, AiFillSetting } from "react-icons/ai";
 import { HiHomeModern } from "react-icons/hi2";
+import Uploader from "../data/Uploader";
 function Sidebar() {
   const navs = [
     {
@@ -69,6 +70,7 @@ function Sidebar() {
             <Box>{n.text}</Box>
           </HStack>
         ))}
+        <Uploader />
       </VStack>
     </Box>
   );
