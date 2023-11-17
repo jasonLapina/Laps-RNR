@@ -10,7 +10,9 @@ function Layout() {
       <Box
         w='100%'
         // px={{ base: "0px", sm: "16px" }}
-        bgColor='gray.100'
+        // bgColor='gray.100'
+        maxH='100vh'
+        overflowY='auto'
         p='32px 80px'
         mx='auto'
         py='72px'

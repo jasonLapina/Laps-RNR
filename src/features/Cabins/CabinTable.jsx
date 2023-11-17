@@ -15,7 +15,7 @@ import {
 
 import SortDiscount from "../Shared/SortDiscount";
 import EmptyData from "../../ui/EmptyData";
-/* eslint-disable react/prop-types */
+
 function CabinTable({ data }) {
   if (!data || data.length === 0) return <EmptyData dataName={"cabins"} />;
   return (
@@ -61,15 +61,18 @@ function CabinTable({ data }) {
                     _hover={{
                       color: "var(--secondary)",
                     }}
+                    variant='unstyled'
+                    color='green.700'
                   >
                     Edit
                   </Button>
                   <Divider bgColor='gray' h='10px' w='2px' />
                   <Button
                     _hover={{
-                      color: "red.700",
+                      color: "red.500",
                     }}
-                    color='red.500'
+                    color='red.700'
+                    variant='unstyled'
                   >
                     Delete
                   </Button>
