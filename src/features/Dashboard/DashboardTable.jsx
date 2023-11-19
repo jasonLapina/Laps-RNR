@@ -13,12 +13,10 @@ function DashboardTable() {
       <Table variant='simple'>
         <Thead>
           <Tr>
-            <Th>Cabin</Th>
-            <Th>Guest</Th>
-            <Th>Dates</Th>
-            <Th>Status</Th>
-            <Th>Amount</Th>
-            <Th></Th>
+            <Th>Statistics</Th>
+            <Th>{"Today's activitiy"}</Th>
+            <Th>Chart stay durations</Th>
+            <Th>Chart sales</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -26,9 +24,6 @@ function DashboardTable() {
             <Td>herrow?</Td>
             <Td>herrow?</Td>
             <Td>herrow?</Td>
-            <Td></Td>
-            <Td>herrow?</Td>
-            <Td></Td>
           </Tr>
         </Tbody>
       </Table>

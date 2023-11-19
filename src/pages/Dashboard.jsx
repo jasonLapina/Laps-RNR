@@ -1,9 +1,21 @@
 import { Button, HStack, Heading } from "@chakra-ui/react";
 import { useState } from "react";
 import DashboardTable from "../features/Dashboard/DashboardTable";
+import useRecentBookings from "../features/Dashboard/useRecentBookings";
+import { useSearchParams } from "react-router-dom";
+
 const days = [7, 30, 90];
 function Dashboard() {
-  const [day, setDay] = useState(7);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { data, isLoading } = useRecentBookings();
+  if (isLoading) return <div />;
+
+  const day = Number(searchParams.get("last")) || 7;
+  const handleDaySelect = (day) => {
+    searchParams.set("last", day);
+    setSearchParams(searchParams);
+  };
+
   return (
     <>
       <HStack alignItems='center' justifyContent='space-between'>
@@ -16,7 +28,7 @@ function Dashboard() {
                 bgColor: "var(--secondary)",
               }}
               key={d}
-              onClick={() => setDay(d)}
+              onClick={() => handleDaySelect(d)}
             >
               In {d} days
             </Button>
