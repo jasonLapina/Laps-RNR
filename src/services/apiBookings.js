@@ -32,7 +32,7 @@ export async function getBookingsAfterDate(date) {
 export async function getStaysAfterDate(date) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, guests(fullName)")
+    .select("*, guests(name)")
     .gte("startDate", date)
     .lte("startDate", getToday());
   if (error) {

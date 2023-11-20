@@ -1,20 +1,22 @@
 import { Button, HStack, Heading } from "@chakra-ui/react";
-import { useState } from "react";
 import DashboardTable from "../features/Dashboard/DashboardTable";
 import useRecentBookings from "../features/Dashboard/useRecentBookings";
 import { useSearchParams } from "react-router-dom";
+import useRecentStays from "../features/Dashboard/useRecentStays";
 
 const days = [7, 30, 90];
 function Dashboard() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isLoading } = useRecentBookings();
-  if (isLoading) return <div />;
+  const { data: recentBookings, isLoading } = useRecentBookings();
+  const { stays, confirmedStays, isLoading: staysLoading } = useRecentStays();
+  if (isLoading || staysLoading) return <div />;
 
   const day = Number(searchParams.get("last")) || 7;
   const handleDaySelect = (day) => {
     searchParams.set("last", day);
     setSearchParams(searchParams);
   };
+  console.log(stays);
 
   return (
     <>
