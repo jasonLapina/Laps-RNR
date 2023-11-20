@@ -15,6 +15,7 @@ import {
 
 import SortDiscount from "../Shared/SortDiscount";
 import EmptyData from "../../ui/EmptyData";
+import { formatCurrency } from "../../utils/helpers";
 
 function CabinTable({ data }) {
   if (!data || data.length === 0) return <EmptyData dataName={"cabins"} />;
@@ -51,9 +52,9 @@ function CabinTable({ data }) {
                 </Text>
               </Td>
               <Td>{item.maxCapacity}</Td>
-              <Td>${Number(item.regularPrice).toFixed(2)}</Td>
+              <Td>{formatCurrency(item.regularPrice)}</Td>
               <Td color='green.500' fontWeight='bold'>
-                {item.discount ? `$${item.discount}` : "--"}
+                {item.discount ? `${formatCurrency(item.discount)}` : "--"}
               </Td>
               <Td maxW='80px'>
                 <HStack gap='16px'>

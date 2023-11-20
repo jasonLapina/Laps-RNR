@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineMore } from "react-icons/ai";
 import EmptyData from "../../ui/EmptyData";
+import { formatCurrency } from "../../utils/helpers";
 function BookingsTable({ bookings }) {
   if (!bookings || bookings.length === 0)
     return <EmptyData dataName={"cabins"} />;
@@ -69,7 +70,7 @@ function BookingsTable({ bookings }) {
               <Td>{item.status}</Td>
               <Td color={item.isPaid ? "green.500" : "red.500"}>
                 <HStack>
-                  <Text>${item.totalPrice}</Text>
+                  <Text>{formatCurrency(item.totalPrice)}</Text>
                   <Divider orientation='vertical' />
                   <Text>{item.isPaid ? "Paid" : "Unpaid"}</Text>
                 </HStack>

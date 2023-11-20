@@ -78,7 +78,7 @@ function Settings() {
           />
         </FormControl>
         <FormControl>
-          <FormLabel>Breakfast price ($)</FormLabel>
+          <FormLabel>Breakfast price (PHP)</FormLabel>
           <Input
             disabled={isUpdating}
             onBlur={(e) => handleUpdate(e, "breakfastPrice")}

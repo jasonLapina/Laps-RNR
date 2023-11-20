@@ -37,8 +37,10 @@ function Dashboard() {
           ))}
         </HStack>
       </HStack>
-
-      <DashboardTable />
+      <DashboardTable
+        bookings={recentBookings}
+        confirmedStays={confirmedStays}
+      />
     </>
   );
 }
